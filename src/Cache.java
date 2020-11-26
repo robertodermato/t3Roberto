@@ -117,6 +117,7 @@ public class Cache{
         }
     }
 
+
     public void showHistorico(){
         System.out.println(historico);
         System.out.println("Hits: " + hits);
@@ -125,11 +126,13 @@ public class Cache{
     public void showMemoria(){
         System.out.println("Estado final do cache");
         for (int i=0; i<linhas; i++ ){
-            String tag = memoria[i][0].getTag();
+            String tag = "não usada";
+            if (memoria[i][0]!=null) tag = memoria[i][0].getTag();
             String dados = "";
 
             for (int j=0; j < palavras; j++){
-                dados = dados + memoria[i][j].endereco + " ";
+                if (memoria[i][j]!=null) dados = dados + memoria[i][j].endereco + " ";
+                else dados = "não usados";
             }
 
             System.out.println("Linha " + i + " Tag: " + tag + " Dados: " + dados);

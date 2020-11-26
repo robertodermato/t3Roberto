@@ -37,12 +37,14 @@ public class Main {
         config1.showHistorico();
         System.out.println("Percentual de acertos: " + config1.percentAcertos() + "%");
 
-
         // Configuração 2 - Mapeamento direto, com 9 bits para tag, 4 bits para linha, 2 bit
         // para palavra e 1 bit para seleção do byte em uma palavra (cache
         // com 16 linhas, 4 palavras por linha).
-        //Cache config2 = new Cache(16,4, "direto");
-        //adicionaEnderecosAoCache (config2, enderecosEmBinario, 9, 4, 2, 1);
+        Cache config2 = new Cache(16,4, "direto");
+        adicionaEnderecosAoCache (config2, enderecosEmBinario, 9, 4, 2, 1);
+        config2.showMemoria();
+        config2.showHistorico();
+        System.out.println("Percentual de acertos: " + config2.percentAcertos() + "%");
 
         // Configuração 3 - Mapeamento associativo, com 12 bits para tag, 3 bits para palavra
         // e 1 bit para seleção do byte em uma palavra (cache com 8 linhas,
