@@ -5,23 +5,24 @@ public class Endereco {
     public int tamanhoDaPalavra;
     public int quantidadeDeBitsParaSelecao;
 
-    public Endereco(String endereco, int tamanhoTag, int tamanhoLinha, int tamanhoPalavra, int bitsSelecao) {
+    public Endereco(String enderecoEmBinario, int tamanhoTag, int tamanhoLinha, int tamanhoPalavra, int bitsSelecao) {
         tamanhoDaTag = tamanhoTag;
         tamanhoDaLinha = tamanhoLinha;
         tamanhoDaPalavra = tamanhoPalavra;
         quantidadeDeBitsParaSelecao = bitsSelecao;
+        endereco = enderecoEmBinario;
     }
 
-    public String tag(){
+    public String getTag(){
         return endereco.substring(0, tamanhoDaTag);
     }
-    public String linha(){
+    public String getLinha(){
         return endereco.substring(tamanhoDaTag, tamanhoDaTag + tamanhoDaLinha);
     }
-    public String palavra(){
+    public String getPalavra(){
         return endereco.substring(tamanhoDaTag + tamanhoDaLinha, tamanhoDaTag + tamanhoDaLinha + tamanhoDaPalavra);
     }
-    public String selec(){
+    public String getBitSelecao(){
         return endereco.substring(tamanhoDaTag + tamanhoDaLinha + tamanhoDaPalavra, tamanhoDaTag + tamanhoDaLinha + tamanhoDaPalavra + quantidadeDeBitsParaSelecao);
     }
 
