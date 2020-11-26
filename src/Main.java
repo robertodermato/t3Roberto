@@ -49,8 +49,11 @@ public class Main {
         // Configuração 3 - Mapeamento associativo, com 12 bits para tag, 3 bits para palavra
         // e 1 bit para seleção do byte em uma palavra (cache com 8 linhas,
         // 8 palavras por linha).
-        //Cache config3 = new Cache(8,8, "associativo");
-        //adicionaEnderecosAoCache (config3, enderecosEmBinario, 12, 0, 3, 1);
+        Cache config3 = new Cache(8,8, "associativo");
+        adicionaEnderecosAoCache (config3, enderecosEmBinario, 12, 0, 3, 1);
+        config3.showMemoria();
+        config3.showHistorico();
+        System.out.println("Percentual de acertos: " + config3.percentAcertos() + "%");
 
         // Configuração 4 - Mapeamento associativo, com 13 bits para tag, 2 bits para palavra
         // e 1 bit para seleção do byte em uma palavra (cache com 16 linhas,
