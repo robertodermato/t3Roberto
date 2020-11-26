@@ -32,23 +32,34 @@ public class Main {
         // para palavra e 1 bit para seleção do byte em uma palavra (cache
         // com 8 linhas, 8 palavras por linha).
         Cache config1 = new Cache(8,8, "direto");
+        adicionaEnderecosAoCache (config1, enderecosEmBinario, 9, 3, 3, 1);
+
 
         // Configuração 2 - Mapeamento direto, com 9 bits para tag, 4 bits para linha, 2 bit
         // para palavra e 1 bit para seleção do byte em uma palavra (cache
         // com 16 linhas, 4 palavras por linha).
         Cache config2 = new Cache(16,4, "direto");
+        adicionaEnderecosAoCache (config1, enderecosEmBinario, 9, 4, 2, 1);
 
         // Configuração 3 - Mapeamento associativo, com 12 bits para tag, 3 bits para palavra
         // e 1 bit para seleção do byte em uma palavra (cache com 8 linhas,
         // 8 palavras por linha).
         Cache config3 = new Cache(8,8, "associativo");
+        adicionaEnderecosAoCache (config1, enderecosEmBinario, 12, 0, 3, 1);
 
         // Configuração 4 - Mapeamento associativo, com 13 bits para tag, 2 bits para palavra
         // e 1 bit para seleção do byte em uma palavra (cache com 16 linhas,
         // 4 palavras por linha).
         Cache config4 = new Cache(16,4, "associativo");
+        adicionaEnderecosAoCache (config1, enderecosEmBinario, 13, 0, 2, 1);
+    }
 
-
+    public static void adicionaEnderecosAoCache (Cache config, String [] enderecos, int tamanhoDaTag,
+                                                 int tamanhoDaLinha, int tamanhoDaPalavra, int bitSelecao){
+        for (int i=0; i < enderecos.length; i++){
+            Endereco end = new Endereco(enderecos[i], tamanhoDaTag, tamanhoDaLinha, tamanhoDaPalavra, bitSelecao);
+            config.add(end);
+        }
     }
 
     public static String [] converteParaBinario (String [] enderecosEmHexadecimal){
