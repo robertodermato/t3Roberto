@@ -8,7 +8,6 @@ public class Cache{
     private ArrayList<String> historico;
     private int hits;
     private int count;
-    private int linhasUsadas;
 
     public Cache(int quantidadeDelinhas, int quantidadeDePalavras, String tipoDoCache){
         linhas=quantidadeDelinhas;
@@ -18,8 +17,8 @@ public class Cache{
         historico = new ArrayList<String>();
         hits=0;
         count=0;
-        linhasUsadas=0;
     }
+
     public void add(Endereco end){
         if(tipo == "direto"){
             int linha = converteBinInt(end.getLinha());
@@ -43,26 +42,15 @@ public class Cache{
             }
             else{
                 historico.add(end + " MISS");
-                if(linhasUsadas < linhas){
-                    for(int i=0;i<palavras;i++){
-                        String bin = end.getTag() + end.getLinha() + palavraGerada(i) + end.getBitSelecao();
-                        memoria[count][i]=new Endereco(bin,end.tamanhoDaTag,end.tamanhoDaLinha,end.tamanhoDaPalavra,end.quantidadeDeBitsParaSelecao);
-                    }
-                    count++;
-                    linhasUsadas++;
-                    if(linhasUsadas==linhas)count=1;
+                if(count==linhas)count=0;
+                for(int i=0;i<palavras;i++){
+                    String bin = end.getTag() + end.getLinha() + palavraGerada(i) + end.getBitSelecao();
+                    memoria[count][i]=new Endereco(bin,end.tamanhoDaTag,end.tamanhoDaLinha,end.tamanhoDaPalavra,end.quantidadeDeBitsParaSelecao);
                 }
-                else{
-                    if(count==linhas)count=0;
-                    for(int i=0;i<palavras;i++){
-                        String bin = end.getTag() + end.getLinha() + palavraGerada(i) + end.getBitSelecao();
-                        memoria[count][i]=new Endereco(bin,end.tamanhoDaTag,end.tamanhoDaLinha,end.tamanhoDaPalavra,end.quantidadeDeBitsParaSelecao);
-                    }
-                    count++;
-                }
+                count++;
             }
         }
-        this.print();
+
     }
     public boolean hitEndereco(Endereco a){
         for(int i = 0;i<linhas;i++){
@@ -107,16 +95,6 @@ public class Cache{
         }
         return res;
     }
-
-    public void print(){
-        for(int i = 0;i<linhas;i++){
-            String linha = "Linha: "+i+" ";
-            for(int j = 0;j<palavras;j++){
-                linha+=memoria[i][j]+" ";
-            }
-        }
-    }
-
 
     public void showHistorico(){
         System.out.println(historico);
