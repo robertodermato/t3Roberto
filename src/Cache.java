@@ -120,4 +120,32 @@ public class Cache{
     public double percentAcertos(){
         return hits*100.0/historico.size();
     }
+
+    public String converteParaHexadecimal (String enderecoEmBinario){
+
+            String enderecoEmHexadecimal = "";
+
+            for (int i=0; i<16; i=i+4) {
+                String parteAnalisada = enderecoEmBinario.substring(i,i+4);
+                if      (parteAnalisada == "0000") enderecoEmHexadecimal += "0";
+                else if (parteAnalisada == "0001") enderecoEmHexadecimal += "1";
+                else if (parteAnalisada == "0010") enderecoEmHexadecimal += "2";
+                else if (parteAnalisada == "0011") enderecoEmHexadecimal += "3";
+                else if (parteAnalisada == "0100") enderecoEmHexadecimal += "4";
+                else if (parteAnalisada == "0101") enderecoEmHexadecimal += "5";
+                else if (parteAnalisada == "0110") enderecoEmHexadecimal += "6";
+                else if (parteAnalisada == "0111") enderecoEmHexadecimal += "7";
+                else if (parteAnalisada == "1000") enderecoEmHexadecimal += "8";
+                else if (parteAnalisada == "1001") enderecoEmHexadecimal += "9";
+                else if (parteAnalisada == "1010") enderecoEmHexadecimal += "a";
+                else if (parteAnalisada == "1011") enderecoEmHexadecimal += "b";
+                else if (parteAnalisada == "1100") enderecoEmHexadecimal += "c";
+                else if (parteAnalisada == "1101") enderecoEmHexadecimal += "d";
+                else if (parteAnalisada == "1110") enderecoEmHexadecimal += "e";
+                else if (parteAnalisada == "1111") enderecoEmHexadecimal += "f";
+
+            }
+        return enderecoEmHexadecimal;
+    }
+
 }
