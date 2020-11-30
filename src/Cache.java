@@ -168,6 +168,11 @@ public class Cache{
         return hits*100.0/historico.size();
     }
 
+    public void showHitsMisses(){
+        System.out.println("Hits: " + hits + " Misses: " + misses + " Total: " + (hits + misses));
+        System.out.println("Percentual de acertos: " + percentAcertos() + "%");
+    }
+
     public String converteParaHexadecimal (String enderecoEmBinario){
 
             String enderecoEmHexadecimal = "";

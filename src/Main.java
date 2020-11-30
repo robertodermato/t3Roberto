@@ -38,7 +38,7 @@ public class Main {
         config1.showMemoriaHexadecimal();
         //config1.showHistorico();
         //config1.showHistoricoEmHexadecimalCompacto();
-        System.out.println("\nPercentual de acertos: " + config1.percentAcertos() + "%");
+        config1.showHitsMisses();
 
         // Configuração 2 - Mapeamento direto, com 9 bits para tag, 4 bits para linha, 2 bit
         // para palavra e 1 bit para seleção do byte em uma palavra (cache
@@ -50,7 +50,7 @@ public class Main {
         config2.showMemoriaHexadecimal();
         //config2.showHistorico();
         //config2.showHistoricoEmHexadecimalCompacto();
-        System.out.println("\nPercentual de acertos: " + config2.percentAcertos() + "%");
+        config2.showHitsMisses();
 
         // Configuração 3 - Mapeamento associativo, com 12 bits para tag, 3 bits para palavra
         // e 1 bit para seleção do byte em uma palavra (cache com 8 linhas,
@@ -62,7 +62,7 @@ public class Main {
         config3.showMemoriaHexadecimal();
         //config3.showHistorico();
         //config3.showHistoricoEmHexadecimalCompacto();
-        System.out.println("\nPercentual de acertos: " + config3.percentAcertos() + "%");
+        config3.showHitsMisses();
 
         // Configuração 4 - Mapeamento associativo, com 13 bits para tag, 2 bits para palavra
         // e 1 bit para seleção do byte em uma palavra (cache com 16 linhas,
@@ -74,7 +74,7 @@ public class Main {
         config4.showMemoriaHexadecimal();
         //config4.showHistorico();
         //config4.showHistoricoEmHexadecimalCompacto();
-        System.out.println("\nPercentual de acertos: " + config4.percentAcertos() + "%");
+        config4.showHitsMisses();
     }
 
     public static void adicionaEnderecosAoCache (Cache config, String [] enderecos, int tamanhoDaTag,
