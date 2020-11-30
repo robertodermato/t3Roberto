@@ -164,6 +164,22 @@ public class Cache{
         }
     }
 
+    public void showMemoriaHexadecimalCompacta(){
+        System.out.println("Estado final do cache");
+        for (int i=0; i<linhas; i++ ){
+            String tag = "não usada";
+            if (memoria[i][0]!=null) tag = memoria[i][0].getTag();
+            String dados = "";
+
+            for (int j=0; j < palavras; j++){
+                if (memoria[i][j]!=null) dados = dados + converteParaHexadecimal(memoria[i][j].endereco) + " ";
+                else dados = "não usados";
+            }
+
+            System.out.println("Linha-" + i + " " + tag + " " + dados);
+        }
+    }
+
     public double percentAcertos(){
         return hits*100.0/historico.size();
     }

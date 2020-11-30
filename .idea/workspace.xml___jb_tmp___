@@ -2,6 +2,7 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="33bce092-ffc6-43db-8c1e-37ad6a88ff5e" name="Default Changelist" comment="">
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml___jb_tmp___" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/src/Cache.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Cache.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/Main.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Main.java" afterDir="false" />
     </list>
@@ -151,6 +152,7 @@
     <MESSAGE value="funçao que converte para hexadecimal" />
     <MESSAGE value="mostra misses" />
     <MESSAGE value="mostra historico em hexadecimal de forma compacta" />
-    <option name="LAST_COMMIT_MESSAGE" value="mostra historico em hexadecimal de forma compacta" />
+    <MESSAGE value="show hit e misses" />
+    <option name="LAST_COMMIT_MESSAGE" value="show hit e misses" />
   </component>
 </project>

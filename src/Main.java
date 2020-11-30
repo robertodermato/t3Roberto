@@ -35,10 +35,11 @@ public class Main {
         adicionaEnderecosAoCache (config1, enderecosEmBinario, 9, 3, 3, 1);
         System.out.println("\n--- Configuração 1 ---");
         //config1.showMemoria();
-        config1.showMemoriaHexadecimal();
+        //config1.showMemoriaHexadecimal();
+        config1.showMemoriaHexadecimalCompacta();
         //config1.showHistorico();
         //config1.showHistoricoEmHexadecimalCompacto();
-        config1.showHitsMisses();
+        //config1.showHitsMisses();
 
         // Configuração 2 - Mapeamento direto, com 9 bits para tag, 4 bits para linha, 2 bit
         // para palavra e 1 bit para seleção do byte em uma palavra (cache
@@ -47,10 +48,11 @@ public class Main {
         adicionaEnderecosAoCache (config2, enderecosEmBinario, 9, 4, 2, 1);
         System.out.println("\n--- Configuração 2 ---");
         //config2.showMemoria();
-        config2.showMemoriaHexadecimal();
+        //config2.showMemoriaHexadecimal();
+        config2.showMemoriaHexadecimalCompacta();
         //config2.showHistorico();
         //config2.showHistoricoEmHexadecimalCompacto();
-        config2.showHitsMisses();
+        //config2.showHitsMisses();
 
         // Configuração 3 - Mapeamento associativo, com 12 bits para tag, 3 bits para palavra
         // e 1 bit para seleção do byte em uma palavra (cache com 8 linhas,
@@ -59,10 +61,11 @@ public class Main {
         adicionaEnderecosAoCache (config3, enderecosEmBinario, 12, 0, 3, 1);
         System.out.println("\n--- Configuração 3 ---");
         //config3.showMemoria();
-        config3.showMemoriaHexadecimal();
+        //config3.showMemoriaHexadecimal();
+        config3.showMemoriaHexadecimalCompacta();
         //config3.showHistorico();
         //config3.showHistoricoEmHexadecimalCompacto();
-        config3.showHitsMisses();
+        //config3.showHitsMisses();
 
         // Configuração 4 - Mapeamento associativo, com 13 bits para tag, 2 bits para palavra
         // e 1 bit para seleção do byte em uma palavra (cache com 16 linhas,
@@ -71,10 +74,11 @@ public class Main {
         adicionaEnderecosAoCache (config4, enderecosEmBinario, 13, 0, 2, 1);
         System.out.println("\n--- Configuração 4 ---");
         //config4.showMemoria();
-        config4.showMemoriaHexadecimal();
+        //config4.showMemoriaHexadecimal();
+        config4.showMemoriaHexadecimalCompacta();
         //config4.showHistorico();
         //config4.showHistoricoEmHexadecimalCompacto();
-        config4.showHitsMisses();
+        //config4.showHitsMisses();
     }
 
     public static void adicionaEnderecosAoCache (Cache config, String [] enderecos, int tamanhoDaTag,
