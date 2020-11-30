@@ -74,6 +74,56 @@ public class Cache{
         }
 
     }
+
+    public void add2(Endereco end){
+        if(tipo == "direto"){
+            int linha = converteBinInt(end.getLinha());
+            int palavra = converteBinInt(end.getPalavra());
+            if(memoria[linha][palavra]!=null && memoria[linha][palavra].getTag().equalsIgnoreCase(end.getTag())){
+                historico.add(end + " HIT");
+                historicoEmHexadecimal.add (converteParaHexadecimal(end.endereco) + " HIT");
+                historicoEmHexadecimalCompacto [countHistHexaComp] = converteParaHexadecimal(end.endereco) + " H";
+                countHistHexaComp ++;
+                hits++;
+            }
+            else{
+                historico.add(end + " MISS");
+                misses++;
+                historicoEmHexadecimal.add (converteParaHexadecimal(end.endereco) + " MISS");
+                historicoEmHexadecimalCompacto [countHistHexaComp] = converteParaHexadecimal(end.endereco) + " M";
+                countHistHexaComp ++;
+                for(int i=0; i<palavras; i++){
+                    String bin = end.getTag() + end.getLinha() + palavraGerada(i) + end.getBitSelecao();
+                    memoria[linha][i]=new Endereco(bin,end.tamanhoDaTag,end.tamanhoDaLinha,end.tamanhoDaPalavra,end.quantidadeDeBitsParaSelecao);
+                }
+            }
+        }
+        else { //é associativo
+            if(hitEndereco2(end)){
+                historico.add(end + " HIT");
+                historicoEmHexadecimal.add (converteParaHexadecimal(end.endereco) + " HIT");
+                historicoEmHexadecimalCompacto [countHistHexaComp] = converteParaHexadecimal(end.endereco) + " H";
+                countHistHexaComp ++;
+                hits++;
+            }
+            else{
+                historico.add(end + " MISS");
+                misses++;
+                historicoEmHexadecimal.add (converteParaHexadecimal(end.endereco) + " MISS");
+                historicoEmHexadecimalCompacto [countHistHexaComp] = converteParaHexadecimal(end.endereco) + " M";
+                countHistHexaComp ++;
+                if(count==linhas)count=0;
+                for(int i=0;i<palavras;i++){
+                    String bin = end.getTag() + end.getLinha() + palavraGerada(i) + end.getBitSelecao();
+                    memoria[count][i]=new Endereco(bin,end.tamanhoDaTag,end.tamanhoDaLinha,end.tamanhoDaPalavra,end.quantidadeDeBitsParaSelecao);
+                }
+                count++;
+            }
+        }
+
+    }
+
+
     public boolean hitEndereco(Endereco a){
         for(int i = 0;i<linhas;i++){
             for (int j=0;j<palavras;j++){
@@ -82,6 +132,18 @@ public class Cache{
         }
         return false;
     }
+
+    public boolean hitEndereco2(Endereco a){
+        for(int i = 0;i<linhas;i++){
+            for (int j=0;j<palavras;j++){
+                if(memoria[i][j]!=null && memoria[i][j].getTag().equalsIgnoreCase(a.getTag())) return true;
+            }
+        }
+        return false;
+    }
+
+
+
     public String palavraGerada(int n) {
         if (palavras==8){
             if (n==0) return "000";
