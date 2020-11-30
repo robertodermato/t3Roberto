@@ -7,6 +7,8 @@ public class Cache{
     private String tipo;
     private ArrayList<String> historico;
     private ArrayList<String> historicoEmHexadecimal;
+    private String [] historicoEmHexadecimalCompacto;
+    private int countHistHexaComp;
     private int hits;
     private int misses;
     private int count;
@@ -21,6 +23,8 @@ public class Cache{
         hits=0;
         misses=0;
         count=0;
+        historicoEmHexadecimalCompacto = new String [196];
+        countHistHexaComp = 0;
     }
 
     public void add(Endereco end){
@@ -30,12 +34,16 @@ public class Cache{
             if(memoria[linha][palavra]!=null && memoria[linha][palavra].endereco.equalsIgnoreCase(end.endereco)){
                 historico.add(end + " HIT");
                 historicoEmHexadecimal.add (converteParaHexadecimal(end.endereco) + " HIT");
+                historicoEmHexadecimalCompacto [countHistHexaComp] = converteParaHexadecimal(end.endereco) + " H";
+                countHistHexaComp ++;
                 hits++;
             }
             else{
                 historico.add(end + " MISS");
                 misses++;
                 historicoEmHexadecimal.add (converteParaHexadecimal(end.endereco) + " MISS");
+                historicoEmHexadecimalCompacto [countHistHexaComp] = converteParaHexadecimal(end.endereco) + " M";
+                countHistHexaComp ++;
                 for(int i=0; i<palavras; i++){
                     String bin = end.getTag() + end.getLinha() + palavraGerada(i) + end.getBitSelecao();
                     memoria[linha][i]=new Endereco(bin,end.tamanhoDaTag,end.tamanhoDaLinha,end.tamanhoDaPalavra,end.quantidadeDeBitsParaSelecao);
@@ -46,12 +54,16 @@ public class Cache{
             if(hitEndereco(end)){
                 historico.add(end + " HIT");
                 historicoEmHexadecimal.add (converteParaHexadecimal(end.endereco) + " HIT");
+                historicoEmHexadecimalCompacto [countHistHexaComp] = converteParaHexadecimal(end.endereco) + " H";
+                countHistHexaComp ++;
                 hits++;
             }
             else{
                 historico.add(end + " MISS");
                 misses++;
                 historicoEmHexadecimal.add (converteParaHexadecimal(end.endereco) + " MISS");
+                historicoEmHexadecimalCompacto [countHistHexaComp] = converteParaHexadecimal(end.endereco) + " M";
+                countHistHexaComp ++;
                 if(count==linhas)count=0;
                 for(int i=0;i<palavras;i++){
                     String bin = end.getTag() + end.getLinha() + palavraGerada(i) + end.getBitSelecao();
@@ -109,6 +121,14 @@ public class Cache{
     public void showHistorico(){
         System.out.println(historico);
         System.out.println(historicoEmHexadecimal);
+        System.out.println("Hits: " + hits + " Misses: " + misses + " Total: " + (hits + misses));
+    }
+
+    public void showHistoricoEmHexadecimalCompacto(){
+        for (int i=0; i<historicoEmHexadecimalCompacto.length; i++){
+            System.out.print(historicoEmHexadecimalCompacto[i] + ", ");
+            if (i!=0 && (i-9)%10==0) System.out.println("");
+        }
         System.out.println("Hits: " + hits + " Misses: " + misses + " Total: " + (hits + misses));
     }
 
