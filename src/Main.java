@@ -35,6 +35,7 @@ public class Main {
         adicionaEnderecosAoCache (config1, enderecosEmBinario, 9, 3, 3, 1);
         System.out.println("\n--- Configuração 1 ---");
         config1.showMemoria();
+        config1.showMemoriaHexadecimal();
         config1.showHistorico();
         System.out.println("Percentual de acertos: " + config1.percentAcertos() + "%");
 
@@ -45,6 +46,7 @@ public class Main {
         adicionaEnderecosAoCache (config2, enderecosEmBinario, 9, 4, 2, 1);
         System.out.println("\n--- Configuração 2 ---");
         config2.showMemoria();
+        config2.showMemoriaHexadecimal();
         config2.showHistorico();
         System.out.println("Percentual de acertos: " + config2.percentAcertos() + "%");
 
@@ -55,6 +57,7 @@ public class Main {
         adicionaEnderecosAoCache (config3, enderecosEmBinario, 12, 0, 3, 1);
         System.out.println("\n--- Configuração 3 ---");
         config3.showMemoria();
+        config3.showMemoriaHexadecimal();
         config3.showHistorico();
         System.out.println("Percentual de acertos: " + config3.percentAcertos() + "%");
 
@@ -65,6 +68,7 @@ public class Main {
         adicionaEnderecosAoCache (config4, enderecosEmBinario, 13, 0, 2, 1);
         System.out.println("\n--- Configuração 4 ---");
         config4.showMemoria();
+        config4.showMemoriaHexadecimal();
         config4.showHistorico();
         System.out.println("Percentual de acertos: " + config4.percentAcertos() + "%");
     }

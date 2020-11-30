@@ -6,7 +6,9 @@ public class Cache{
     private int palavras;
     private String tipo;
     private ArrayList<String> historico;
+    private ArrayList<String> historicoEmHexadecimal;
     private int hits;
+    private int misses;
     private int count;
 
     public Cache(int quantidadeDelinhas, int quantidadeDePalavras, String tipoDoCache){
@@ -15,7 +17,9 @@ public class Cache{
         memoria = new Endereco[linhas][palavras];
         tipo = tipoDoCache;
         historico = new ArrayList<String>();
+        historicoEmHexadecimal = new ArrayList<>();
         hits=0;
+        misses=0;
         count=0;
     }
 
@@ -25,10 +29,13 @@ public class Cache{
             int palavra = converteBinInt(end.getPalavra());
             if(memoria[linha][palavra]!=null && memoria[linha][palavra].endereco.equalsIgnoreCase(end.endereco)){
                 historico.add(end + " HIT");
+                historicoEmHexadecimal.add (converteParaHexadecimal(end.endereco) + " HIT");
                 hits++;
             }
             else{
                 historico.add(end + " MISS");
+                misses++;
+                historicoEmHexadecimal.add (converteParaHexadecimal(end.endereco) + " MISS");
                 for(int i=0; i<palavras; i++){
                     String bin = end.getTag() + end.getLinha() + palavraGerada(i) + end.getBitSelecao();
                     memoria[linha][i]=new Endereco(bin,end.tamanhoDaTag,end.tamanhoDaLinha,end.tamanhoDaPalavra,end.quantidadeDeBitsParaSelecao);
@@ -38,10 +45,13 @@ public class Cache{
         else { //é associativo
             if(hitEndereco(end)){
                 historico.add(end + " HIT");
+                historicoEmHexadecimal.add (converteParaHexadecimal(end.endereco) + " HIT");
                 hits++;
             }
             else{
                 historico.add(end + " MISS");
+                misses++;
+                historicoEmHexadecimal.add (converteParaHexadecimal(end.endereco) + " MISS");
                 if(count==linhas)count=0;
                 for(int i=0;i<palavras;i++){
                     String bin = end.getTag() + end.getLinha() + palavraGerada(i) + end.getBitSelecao();
@@ -98,7 +108,8 @@ public class Cache{
 
     public void showHistorico(){
         System.out.println(historico);
-        System.out.println("Hits: " + hits);
+        System.out.println(historicoEmHexadecimal);
+        System.out.println("Hits: " + hits + " Misses: " + misses + " Total: " + (hits + misses));
     }
 
     public void showMemoria(){
@@ -117,6 +128,22 @@ public class Cache{
         }
     }
 
+    public void showMemoriaHexadecimal(){
+        System.out.println("Estado final do cache");
+        for (int i=0; i<linhas; i++ ){
+            String tag = "não usada";
+            if (memoria[i][0]!=null) tag = memoria[i][0].getTag();
+            String dados = "";
+
+            for (int j=0; j < palavras; j++){
+                if (memoria[i][j]!=null) dados = dados + converteParaHexadecimal(memoria[i][j].endereco) + " ";
+                else dados = "não usados";
+            }
+
+            System.out.println("Linha " + i + " Tag: " + tag + " Dados: " + dados);
+        }
+    }
+
     public double percentAcertos(){
         return hits*100.0/historico.size();
     }
@@ -127,23 +154,22 @@ public class Cache{
 
             for (int i=0; i<16; i=i+4) {
                 String parteAnalisada = enderecoEmBinario.substring(i,i+4);
-                if      (parteAnalisada == "0000") enderecoEmHexadecimal += "0";
-                else if (parteAnalisada == "0001") enderecoEmHexadecimal += "1";
-                else if (parteAnalisada == "0010") enderecoEmHexadecimal += "2";
-                else if (parteAnalisada == "0011") enderecoEmHexadecimal += "3";
-                else if (parteAnalisada == "0100") enderecoEmHexadecimal += "4";
-                else if (parteAnalisada == "0101") enderecoEmHexadecimal += "5";
-                else if (parteAnalisada == "0110") enderecoEmHexadecimal += "6";
-                else if (parteAnalisada == "0111") enderecoEmHexadecimal += "7";
-                else if (parteAnalisada == "1000") enderecoEmHexadecimal += "8";
-                else if (parteAnalisada == "1001") enderecoEmHexadecimal += "9";
-                else if (parteAnalisada == "1010") enderecoEmHexadecimal += "a";
-                else if (parteAnalisada == "1011") enderecoEmHexadecimal += "b";
-                else if (parteAnalisada == "1100") enderecoEmHexadecimal += "c";
-                else if (parteAnalisada == "1101") enderecoEmHexadecimal += "d";
-                else if (parteAnalisada == "1110") enderecoEmHexadecimal += "e";
-                else if (parteAnalisada == "1111") enderecoEmHexadecimal += "f";
-
+                if      (parteAnalisada.equalsIgnoreCase("0000")) enderecoEmHexadecimal += "0";
+                else if (parteAnalisada.equalsIgnoreCase("0001")) enderecoEmHexadecimal += "1";
+                else if (parteAnalisada.equalsIgnoreCase("0010")) enderecoEmHexadecimal += "2";
+                else if (parteAnalisada.equalsIgnoreCase("0011")) enderecoEmHexadecimal += "3";
+                else if (parteAnalisada.equalsIgnoreCase("0100")) enderecoEmHexadecimal += "4";
+                else if (parteAnalisada.equalsIgnoreCase("0101")) enderecoEmHexadecimal += "5";
+                else if (parteAnalisada.equalsIgnoreCase("0110")) enderecoEmHexadecimal += "6";
+                else if (parteAnalisada.equalsIgnoreCase("0111")) enderecoEmHexadecimal += "7";
+                else if (parteAnalisada.equalsIgnoreCase("1000")) enderecoEmHexadecimal += "8";
+                else if (parteAnalisada.equalsIgnoreCase("1001")) enderecoEmHexadecimal += "9";
+                else if (parteAnalisada.equalsIgnoreCase("1010")) enderecoEmHexadecimal += "a";
+                else if (parteAnalisada.equalsIgnoreCase("1011")) enderecoEmHexadecimal += "b";
+                else if (parteAnalisada.equalsIgnoreCase("1100")) enderecoEmHexadecimal += "c";
+                else if (parteAnalisada.equalsIgnoreCase("1101")) enderecoEmHexadecimal += "d";
+                else if (parteAnalisada.equalsIgnoreCase("1110")) enderecoEmHexadecimal += "e";
+                else if (parteAnalisada.equalsIgnoreCase("1111")) enderecoEmHexadecimal += "f";
             }
         return enderecoEmHexadecimal;
     }
